@@ -1,0 +1,188 @@
+/* App.css - Full Responsive Styles */
+
+/* 1. Layout Wrapper 
+   This ensures the card is perfectly centered on the screen 
+   and removes any default side borders. */
+.landing-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f4f7f6; /* Soft light background */
+  padding: 20px;
+}
+
+/* 2. Main Content Card 
+   This is the white box seen in your screenshot. 
+   Max-width 420px is the sweet spot for mobile QR scanners. */
+.landing-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px; 
+  padding: 50px 30px;
+  border-radius: 28px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  border: none; /* Eliminates the lines on the sides */
+}
+
+/* 3. Company Logo (Top) */
+.main-logo {
+  width: 180px;
+  height: auto;
+  margin-bottom: 45px;
+  object-fit: contain;
+}
+
+/* 4. Section Title */
+.estate-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #999;
+  margin-bottom: 40px;
+}
+
+/* 5. The Estate Logos Grid */
+.button-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Space between the logos */
+  align-items: center;
+}
+
+/* 6. The "Invisible" Button 
+   Removes background/borders so only the logo is visible. */
+.brand-card {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 7. Individual Estate Logo Styling */
+.estate-logo {
+  width: 80%;
+  max-height: 85px;
+  object-fit: contain;
+  /* Note: If the Victoria logo still has a dark box, 
+     it's best to edit the image to be a transparent PNG. */
+}
+
+/* 8. Interaction Effects */
+
+/* For Mouse Users (Desktop) */
+@media (hover: hover) {
+  .brand-card:hover {
+    transform: scale(1.1); /* Logo grows slightly on hover */
+  }
+}
+
+/* For Touch Users (Mobile) */
+.brand-card:active {
+  transform: scale(0.94); /* Logo shrinks slightly when tapped */
+  opacity: 0.8;
+}
+
+/* 9. Responsiveness for Larger Screens (Tablets/Desktops) */
+@media (min-width: 768px) {
+  .landing-container {
+    max-width: 480px;
+    padding: 60px 40px;
+  }
+  
+  .estate-title {
+    font-size: 0.9rem;
+  }
+}
+
+/* Intro Overlay - Brand Gradient */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Breighton-inspired Gradient: Navy to Orange */
+  background: linear-gradient(135deg, #004a7c 0%, #ed8b00 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.intro-content {
+  text-align: center;
+  color: white; /* Text must be white to pop against the gradient */
+}
+
+.intro-logo {
+  width: 140px;
+  margin-bottom: 20px;
+  filter: brightness(0) invert(1); /* Forces logo to be white for the intro */
+}
+
+.logo-glow {
+  animation: pulse 2s infinite;
+}
+
+.intro-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.intro-subtext {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* Transition to Main Card */
+.hidden {
+  display: none;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure the main container still looks clean */
+.landing-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  padding: 50px 30px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  text-align: center;
+}
