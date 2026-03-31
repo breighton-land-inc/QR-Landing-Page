@@ -1,4 +1,3 @@
-<%@ Page Language="C#" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +98,7 @@
 
     <script>
         let currentRole = 'Broker';
-        let currentPerson = '';
+        let currentPerson = ''; 
 
         document.addEventListener('DOMContentLoaded', () => {
             // Intro Timer
@@ -171,6 +170,6 @@
                 alert('Received ' + files.length + ' file(s) for ' + currentPerson + ' from ' + currentRole + ' ' + uploaderName);
             }
         }
-    </script>
+    </script> 
 </body>
 </html>

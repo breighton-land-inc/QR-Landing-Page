@@ -20,7 +20,13 @@ const ESTATES = [
     name: 'Montefaro', 
     logo: './Montefaro.png',
     url: 'https://breighton-land-inc.github.io/Montefaro-Materials/' 
-  }
+  },
+  {
+    id: 'carmona estates',
+    name: 'Carmona Estates',
+    logo: './Carmona Estates.jpg',
+    url: 'https://breighton-land-inc.github.io/Carmona-Estates-Materials/'
+  },
 ];
 
 // Single button configuration for the accreditation portal
@@ -30,7 +36,7 @@ const AccreditationConfig = {
 };
 
 // Global Maintenance Mode flag - set to false to disable
-const isMaintenance = true;
+const isMaintenance = false;
 
 function MaintenancePage() {
   return (
@@ -108,7 +114,7 @@ function App() {
           <div className="button-grid" style={{ flexDirection: 'row', gap: '20px', justifyContent: 'center' }}>
             <button 
               className="person-btn" 
-              onClick={() => setShowUpload(true)}
+              onClick={() => alert("this page is undermaintenace making improvement for you")}
             >
               {AccreditationConfig.name}
             </button>
