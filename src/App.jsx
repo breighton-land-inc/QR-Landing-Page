@@ -25,27 +25,53 @@ const ESTATES = [
     id: 'carmona estates',
     name: 'Carmona Estates',
     logo: './Carmona Estates.jpg',
-    url: 'https://breighton-land-inc.github.io/Carmona-Estates-Materials/'
+    url: '#' 
   },
 ];
 
-// Single button configuration for the accreditation portal
 const AccreditationConfig = {
   id: 'accreditation',
   name: "Broker's Accreditation"
 };
 
-// Global Maintenance Mode flag - set to false to disable
-const isMaintenance = false;
+function MaintenancePage({ onBack }) {
+  const [countdown, setCountdown] = useState(10);
 
-function MaintenancePage() {
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      onBack();
+    }
+  }, [countdown, onBack]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f9f9f9', color: '#333', textAlign: 'center', padding: '20px' }}>
       <img src="./Breighton Flat Logo FC-8.png" alt="Breighton Logo" style={{ maxWidth: '250px', marginBottom: '30px' }} />
       <h1 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>Under Maintenance</h1>
-      <p style={{ fontSize: '1.2rem', maxWidth: '600px', lineHeight: '1.6', opacity: 0.9 }}>
-        The system is under maintenance for more improvement. We'll be back online shortly. Thank you for your patience!
+      <p style={{ fontSize: '1.2rem', maxWidth: '600px', lineHeight: '1.6', opacity: 0.9, marginBottom: '30px' }}>
+        This page is under maintenance. making more improvement for your needs.
       </p>
+      <p style={{ fontSize: '1.5rem', color: '#666', marginBottom: '20px' }}>
+        Auto redirecting in <span style={{ color: '#004a7c', fontWeight: 'bold', fontSize: '2rem' }}>{countdown}</span>s
+      </p>
+      <button 
+        onClick={onBack}
+        style={{
+          background: 'linear-gradient(135deg, #004a7c 0%, #006eb4 100%)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '14px',
+          padding: '14px 28px',
+          fontSize: '1.1rem',
+          fontWeight: '600',
+          cursor: 'pointer',
+          boxShadow: '0 8px 20px rgba(0,74,124,0.3)'
+        }}
+      >
+        Go Back Now
+      </button>
     </div>
   );
 }
@@ -53,9 +79,9 @@ function MaintenancePage() {
 function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [showUpload, setShowUpload] = useState(false);
+  const [showMaintenance, setShowMaintenance] = useState(false);
 
   useEffect(() => {
-    // Timer for the "Welcome Brokers & Sellers" intro screen
     const timer = setTimeout(() => {
       setShowIntro(false);
     }, 3500); 
@@ -63,19 +89,23 @@ function App() {
   }, []);
 
   const handleSelection = (url) => {
-    if (url) {
-      // Opens the link in a new tab for a better user experience
+    if (url === '#') {
+      setShowMaintenance(true);
+    } else if (url) {
       window.open(url, '_blank', 'noopener,noreferrer');
     }
   };
 
-  if (isMaintenance) {
-    return <MaintenancePage />;
+  const goBackFromMaintenance = () => {
+    setShowMaintenance(false);
+  };
+
+  if (showMaintenance) {
+    return <MaintenancePage onBack={goBackFromMaintenance} />;
   }
 
   return (
     <div className="landing-wrapper">
-      {/* 1. INTRODUCTION OVERLAY */}
       {showIntro && (
         <div className="intro-overlay">
           <div className="intro-content">
@@ -88,7 +118,6 @@ function App() {
         </div>
       )}
 
-      {/* 2. MAIN LANDING PAGE (Reveals after Intro) */}
       {!showUpload && (
         <div className={`landing-container ${!showIntro ? 'fade-in-up' : 'hidden'}`}>
           <header>
@@ -102,7 +131,7 @@ function App() {
               <div 
                 key={estate.id} 
                 className="brand-card" 
-                onClick={() => handleSelection(estate.url)} // Triggers redirect
+                onClick={() => handleSelection(estate.url)}
               >
                 <img src={estate.logo} alt={estate.name} className="estate-logo" />
               </div>
@@ -114,7 +143,7 @@ function App() {
           <div className="button-grid" style={{ flexDirection: 'row', gap: '20px', justifyContent: 'center' }}>
             <button 
               className="person-btn" 
-              onClick={() => alert("this page is undermaintenace making improvement for you")}
+              onClick={() => setShowMaintenance(true)}
             >
               {AccreditationConfig.name}
             </button>
@@ -122,7 +151,6 @@ function App() {
         </div>
       )}
 
-      {/* 3. UPLOAD PAGE */}
       {showUpload && !showIntro && (
         <UploadPage 
           onBack={() => setShowUpload(false)} 
