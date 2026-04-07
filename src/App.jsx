@@ -25,7 +25,7 @@ const ESTATES = [
     id: 'carmona estates',
     name: 'Carmona Estates',
     logo: './Carmona Estates.jpg',
-    url: '#' 
+    url: 'https://breighton-land-inc.github.io/Carmona-Estate-Materials/' 
   },
 ];
 
